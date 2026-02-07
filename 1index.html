@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sandhanika ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+  margin:0;
+  font-family: 'Poppins', Arial, sans-serif;
+  background: linear-gradient(135deg,#ff6a88,#ff99ac);
+  color:white;
+  overflow:hidden;
+}
+
+/* Scene base */
+.scene{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  opacity:0;
+  transform:translateY(16px) scale(.98);
+  transition:
+    opacity .9s cubic-bezier(.4,0,.2,1),
+    transform .9s cubic-bezier(.4,0,.2,1);
+}
+.scene.active{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+
+/* Card */
+.card{
+  background:rgba(255,255,255,0.18);
+  padding:30px;
+  border-radius:22px;
+  max-width:85%;
+  box-shadow:0 12px 34px rgba(0,0,0,.35);
+}
+
+.big{ font-size:30px; font-weight:600; }
+.mid{ font-size:22px; }
+.small{ font-size:18px; opacity:.95; }
+
+/* Gift & hearts */
+.gift{
+  font-size:90px;
+  animation:bounce .9s infinite;
+}
+@keyframes bounce{
+  0%,100%{ transform:translateY(0) }
+  50%{ transform:translateY(-12px) }
+}
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:22px;
+  animation:rise 1.9s ease forwards;
+}
+@keyframes rise{
+  to{ transform:translateY(-110vh); opacity:0 }
+}
+</style>
+</head>
+
+<body>
+
+<div class="scene active">
+  <div class="card big">Hey Sandhanika 🌹</div>
+</div>
+
+<div class="scene">
+  <div class="card mid">
+    Ye rose sirf phool nahi,<br>
+    meri feelings ka symbol hai ❤️
+  </div>
+</div>
+
+<div class="scene">
+  <div class="card big">
+    Tum meri favourite feeling ho 💖
+  </div>
+</div>
+
+<div class="scene">
+  <div class="card mid">
+    Jab bhi tum saath hoti ho,<br>
+    duniya perfect lagti hai ✨
+  </div>
+</div>
+
+<div class="scene" id="giftScene">
+  <div class="card">
+    <div class="gift">🎁</div>
+    <div class="mid">Your surprise…</div>
+  </div>
+</div>
+
+<div class="scene">
+  <div class="card big">
+    Happy Rose Day 🌹<br><br>
+    <span class="small">— From <b>Adhish</b></span>
+  </div>
+</div>
+
+<script>
+const scenes = document.querySelectorAll('.scene');
+let i = 0;
+
+/* Reel-like timing: ~2.2 sec */
+const REEL_TIME = 2200;
+
+const interval = setInterval(()=>{
+  scenes[i].classList.remove('active');
+  i++;
+  if(i < scenes.length){
+    scenes[i].classList.add('active');
+    if(scenes[i].id === 'giftScene') popHearts();
+  } else {
+    clearInterval(interval);
+  }
+}, REEL_TIME);
+
+function popHearts(){
+  for(let j=0;j<16;j++){
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.innerText = '❤️';
+    h.style.left = Math.random()*100 + 'vw';
+    h.style.animationDelay = (Math.random()*0.4)+'s';
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(), 1900);
+  }
+}
+</script>
+
+</body>
+</html>
